@@ -1,5 +1,5 @@
-/* eslint no-console: "off" */
 /* eslint no-unused-vars: "off" */
+/* eslint no-undef: "off" */
 
 const capture = {
   init() {
@@ -29,7 +29,7 @@ const capture = {
         origin: originUrl.hostname,
         requestTime: response.timeStamp
       };
-      console.log('storage.thirdPartyRequest:', tabUrl, thirdPartyData);
+      store.setThirdParty(document, thirdPartyData);
     }
   },
 
@@ -41,8 +41,7 @@ const capture = {
       && tabUrl.protocol !== 'about:'
       && tabId !== browser.tabs.TAB_ID_NONE) {
       const firstPartyData = { faviconUrl: tab.favIconUrl };
-      console.log('storage.firstPartyRequest:',
-        tabUrl.hostname, firstPartyData);
+      store.setFirstParty(tabUrl.hostname, firstPartyData);
     }
   }
 };
